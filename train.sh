@@ -1,0 +1,2 @@
+# nvidia-docker run --name yolov7 -it -v /datadrive_01/data/:/yolov7/coco/ -v /datadrive_01/coco_stuff:/yolov7/coco_stuff -v /datadrive_01/thang/yolov7/:/yolov7  --shm-size=64g -p 1000:1000 -p 1001:1001 nvcr.io/nvidia/pytorch:21.08-py3
+python -m torch.distributed.launch --nproc_per_node 2 train_aux.py --workers 8 --device 0,1 --batch-size 4 --data data/coco.yaml --img 1024 1024 --cfg cfg/training/yolov7-e6e.yaml --weights 'yolov7-e6e_training.pt' --name scratch --hyp data/hyp.scratch.custom.yaml
